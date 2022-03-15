@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           ebird download
+// @name           ebird picture downloader
 // @namespace    https://github.com/sun-jiao
 // @match          https://ebird.org/*
 // @grant          GM_xmlhttpRequest
