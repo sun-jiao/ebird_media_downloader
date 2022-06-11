@@ -37,6 +37,5 @@ Tampermonkey安装好后，
 
 * 安装完成后即可使用（安装前打开的页面需要刷新或重新进入才能生效），点击右下角的「下载」按钮即可下载：
 
-![image](https://user-images.githubusercontent.com/14086980/173176191-2a956442-34b7-4e6c-b153-483ee3c906b2.png)
-
+![image](https://user-images.githubusercontent.com/14086980/173176251-acaa6d4a-daa3-4b6d-abb5-798531f076a8.png)
 
