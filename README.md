@@ -1,5 +1,21 @@
 # ebird_picture_downloader
 
+适用于eBird，Macaulay Library，Birds of the World的图片下载脚本。
+
+## 本脚本可以和不可以做什么：
+
+从eBird下载图片需要使用审查元素，本脚本可以在网页中添加下载按钮，无需通过审查元素直接下载图片。
+
+本脚本不可以从eBird批量爬取图片，也不可以破解 2400 px 的限制！
+
+## 版权说明：
+
+* 由于ebird的限制，对于宽度 < 2400 px 的图片来说，这样下载的就是原图，而对于宽度 > 2400 px 的图片来说，下载的不是原图，而是宽度 = 2400 px 的高清图。因为真正的原图只有作者可以下载。
+
+* 使用时请务必遵守ebird的规范并尊重原作者的版权，请勿用于非法用途。
+
+## 脚本安装：
+
 tampermonkey的安装我就不写了，网上教程一搜一大把。
 
 给两个链接：
@@ -8,7 +24,7 @@ tampermonkey的安装我就不写了，网上教程一搜一大把。
 
 [Tampermonkey(油猴)的安装和使用的小白教程 - 简书](https://www.jianshu.com/p/aa313195ae65)
 
-## 主要说脚本安装吧：
+Tampermonkey安装好后，
 
 * 先点开这个文件：
 ![image](https://user-images.githubusercontent.com/14086980/158395104-b7596f51-8ae9-4a8c-aa9d-fa8044547d67.png)
@@ -19,19 +35,8 @@ tampermonkey的安装我就不写了，网上教程一搜一大把。
 * 点击安装：
 ![image](https://user-images.githubusercontent.com/14086980/158398055-9b99cc3d-2ecc-41fb-9023-ff24733b230c.png)
 
-* 安装完成后，点击这个「报告」（英文版是Report）即可直接下载高清大图。
-![image](https://user-images.githubusercontent.com/14086980/158396629-7b31ceb5-6ca8-4a10-85ce-7d40286a3bdf.png)
+* 安装完成后即可使用（安装前打开的页面需要刷新或重新进入才能生效），点击右下角的「下载」按钮即可下载：
 
-这里我确实偷懒了，因为这个「报告」（或者Report）按钮本来的功能相当于国内网站的「举报」，只是我觉得一般很少会有人要举报别人拍的鸟图，所以就复用了这个没啥用的按钮。
+![image](https://user-images.githubusercontent.com/14086980/173176191-2a956442-34b7-4e6c-b153-483ee3c906b2.png)
 
-本来是想单独写个按钮的，但是我太懒了。
 
-将就用吧。
-
-楽。
-
-## PS：
-
-* 由于ebird的限制，对于宽度 < 2400 px 的图片来说，这样下载的就是原图，而对于宽度 > 2400 px 的图片来说，下载的不是原图，而是宽度 = 2400 px 的高清图。因为真正的原图只有作者可以下载。
-
-* 使用时请务必遵守ebird的规范并尊重原作者的版权，请勿用于非法用途。
