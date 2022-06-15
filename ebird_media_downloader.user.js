@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name           eBird media downloader
+// @name:zh-CN    eBird媒体下载器
 // @namespace      https://github.com/sun-jiao
 // @match          https://*.ebird.org/*
 // @match          https://*.macaulaylibrary.org/*
@@ -8,8 +9,8 @@
 // @version        2.0
 // @author         Sun Jiao
 // @license        GPL_v3
-// @description    Edit the report button to download the medias from ebird or view it in browser.
-// ==/UserScript==
+// @description    Add a button to download the medias from eBird or view it in browser.
+// @description:zh-cn   添加从eBird下载媒体或在浏览器中浏览的按钮
 
 
 const PREFIX = 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/';
