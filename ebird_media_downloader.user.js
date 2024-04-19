@@ -6,11 +6,14 @@
 // @match          https://*.macaulaylibrary.org/*
 // @match          https://birdsoftheworld.org/*
 // @grant          GM_xmlhttpRequest
-// @version        2.0
+// @version        3.0
 // @author         Sun Jiao
 // @license        GPL_v3
 // @description    Add a button to download the medias from eBird or view it in browser.
 // @description:zh-cn   添加从eBird下载媒体或在浏览器中浏览的按钮
+// @downloadURL https://update.greasyfork.org/scripts/446520/eBird%20media%20downloader.user.js
+// @updateURL https://update.greasyfork.org/scripts/446520/eBird%20media%20downloader.meta.js
+// ==/UserScript==
 
 
 const PREFIX = 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/';
@@ -18,9 +21,6 @@ const SUFFIX = '/2400';
 const SPEC = '/spectrogram_small';
 const AUDIO = '/audio';
 const VIDEO = '/mp4/1280';
-
-var list; //list
-var ID; //
 
 var download = "Download";
 
@@ -97,43 +97,23 @@ function setDownload(){
 }
 
 function ebird(){
-    switch(window.location.hostname){
-        case("ebird.org"):{
-            list = document.getElementsByClassName('Lightbox-specimenLinks')[0].getElementsByClassName('UnorderedList UnorderedList--flat').at(-1); //UnorderedList
-            if(list == undefined){
-                return;
-            }
-
-            //最后一个UnorderedList就是媒体页面右下角的「报告-记录-Library」的List, lis中的最后一个li一般是「Macaulay Library」按钮, 指向该媒体文件的Macaulay Library链接
-
-            var href1 = list.getElementsByTagName("li").at(-1).getElementsByTagName("a")[0].getAttribute("href");
-            ID = getID(href1);
-            break;
-        }
-        case("macaulaylibrary.org"):{
-            list = document.getElementsByClassName("actions")[0]
-            ID = getID(window.location.href);
-            break;
-        }
-        case("birdsoftheworld.org"):
-        case("media.ebird.org"):
-        case("search.macaulaylibrary.org"):{
-            var boxes = document.getElementsByClassName("Lightbox-figure");
-            for (var i = 0; i < boxes.length; i++){
-                var box = boxes[i];
-                var inner = box.getElementsByClassName("Lightbox-media-inner");
-                if (inner.length == 1){
-                    list = box.getElementsByClassName("Lightbox-links")[0];
-                    var href2 = list.getElementsByTagName("div").at(-1).getElementsByTagName("a")[0].getAttribute("href");
-                    ID = getID(href2);
-                }
-            }
-            break;
-        }
-        default:
-            return;
+    let lists = document.getElementsByClassName('Lightbox-links');
+    for (const list of lists) {
+        var href1 = list.getElementsByTagName("div").at(-1).getElementsByTagName("a")[0].getAttribute("href");
+        let ID = getID(href1);
+        process(list, ID);
     }
 
+    if (window.location.hostname == "macaulaylibrary.org") {
+        let lists2 = document.getElementsByClassName("actions");
+        for (const list of lists2) {
+            let ID = getID(window.location.href);
+            process(list, ID);
+        }
+    }
+}
+
+function process(list, ID){
     console.log('ID:' + ID);
 
     var href = PREFIX + ID + SUFFIX;
@@ -148,9 +128,9 @@ function ebird(){
         return;
     }
 
-    var text = "\t<div class=\"Raccoon-s-script\">\r\t\t\t\t<a target=\"_blank\" rel=\"noopener\" class=\"\" href=\"" + href + "\">\r\t\t\t\t\t<svg class=\"Icon Icon--download\" role=\"img\"><use xlink:href=\"#Icon--download\"></use></svg>\r\t\t\t\t\t下载\r\t\t\t\t</a>\r\t\t\t</div>"
-    var body = stringToHTML(text);
-    var new_div = body.getElementsByTagName("div")[0]
+    var text = "\t<div class=\"Raccoon-s-script\">\r\t\t\t\t<a target=\"_blank\" rel=\"noopener\" class=\"\" href=\"" + href + "\">\r\t\t\t\t\t<svg class=\"Icon Icon--download\" role=\"img\"><use xlink:href=\"#Icon--download\"></use></svg>\r\t\t\t\t\t" + download + "\r\t\t\t\t</a>\r\t\t\t</div>"
+    var downloadBtn = stringToHTML(text);
+    var new_div = downloadBtn.getElementsByTagName("div")[0]
     list.appendChild(new_div);
 }
 
